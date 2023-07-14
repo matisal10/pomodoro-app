@@ -23,6 +23,7 @@
   /* transform: rotate(-90deg); */
   transform-origin: 50% 50%;
   transition: stroke-dashoffset 0.3s ease-in-out;
+  width: 200px;
 }
 
 .circle circle {
@@ -72,4 +73,16 @@ button{
 
 .reset {
   color: red
+}
+
+@media (width < 768px) {
+  .container{
+    width: 345px;
+  }
+}
+
+@media (width < 450px) {
+  .container{
+    width: 335px;
+  }
 }
