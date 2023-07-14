@@ -59,6 +59,7 @@
 }
 button{
   margin-right: 10px;
+  border-color:transparent !important;
 }
 
 .start {

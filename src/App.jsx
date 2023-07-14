@@ -101,10 +101,10 @@ const App = () => {
         <span>{formatTime(time)}</span>
       </div>
       <div className="buttons">
-        {!isActive && <Button variant={"outline"} color={"green"} onClick={startTimer} className="start">Start</Button>}
-        {isActive && <Button variant={"outline"} color={"green"} onClick={pauseTimer} className="pause">Pause</Button>}
-        <Button variant={"outline"} color={"teal"} onClick={startBreak}>Break Time</Button>
-        <Button variant={"outline"} color={"red"} onClick={resetTimer} className="reset">Reset</Button>
+        {!isActive && <Button variant={"ghost"} color={"green"} onClick={startTimer} className="start">Start</Button>}
+        {isActive && <Button variant={"ghost"} color={"green"} onClick={pauseTimer} className="pause">Pause</Button>}
+        <Button variant={"ghost"} color={"teal"} onClick={startBreak}>Break Time</Button>
+        <Button variant={"ghost"} color={"red"} onClick={resetTimer} className="reset">Reset</Button>
       </div>
       <audio style={{ display: 'none' }} ref={audioRef}>
         <source src={soundFile} type="audio/mpeg" />
