@@ -1,6 +1,7 @@
-import React, { useState, useEffect,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import { Button } from '@chakra-ui/react'
+import { Heading } from '@chakra-ui/react'
 
 import './App.css'
 
@@ -11,9 +12,11 @@ const App = () => {
   const [isActive, setIsActive] = useState(false);
   const [progress, setProgress] = useState(437);
   const audioRef = useRef(null);
+  const [isBreak, setIsBreak] = useState(false);
+
 
   const calculateProgress = () => {
-    const totalSeconds = 1500; // 25 minutos en segundos
+    const totalSeconds = isBreak ? 300 : 1500;
     const remainingSeconds = time;
     const calculatedProgress = ((totalSeconds - remainingSeconds) / totalSeconds) * 437; // Usamos 437 como la circunferencia total (2 * PI * radio = 2 * 4.37 * 50)
     setProgress(calculatedProgress);
@@ -66,6 +69,13 @@ const App = () => {
     stopSound();
   };
 
+  const startBreak = () => {
+    setIsActive(true);
+    setTime(300);
+    setIsBreak(true);
+  };
+
+
   const formatTime = time => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
@@ -80,7 +90,10 @@ const App = () => {
 
   return (
     <div className="container" >
-      <h1>Pomodoro tracker</h1>
+      {/* <h1>Pomodoro tracker</h1> */}
+      <Heading color={"white"} as='h3' size='lg'>
+        Pomodoro tracker
+      </Heading>
       <div className="timer">
         <svg className="circle">
           <circle r="70" cx="72" cy="72" style={{ strokeDashoffset: progress }}></circle>
@@ -88,11 +101,12 @@ const App = () => {
         <span>{formatTime(time)}</span>
       </div>
       <div className="buttons">
-        {!isActive  && <Button onClick={startTimer} className="start">Start</Button>}
-        {isActive  && <Button onClick={pauseTimer} className="pause">Pause</Button>}
-        <Button onClick={resetTimer} className="reset">Reset</Button>
+        {!isActive && <Button variant={"outline"} color={"green"} onClick={startTimer} className="start">Start</Button>}
+        {isActive && <Button variant={"outline"} color={"green"} onClick={pauseTimer} className="pause">Pause</Button>}
+        <Button variant={"outline"} color={"teal"} onClick={startBreak}>Break Time</Button>
+        <Button variant={"outline"} color={"red"} onClick={resetTimer} className="reset">Reset</Button>
       </div>
-      <audio style={{display:'none'}} ref={audioRef}>
+      <audio style={{ display: 'none' }} ref={audioRef}>
         <source src={soundFile} type="audio/mpeg" />
         Tu navegador no admite la reproducción de sonidos.
       </audio>
